@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aa23018a2df9254882799495f61bb2d, type: 3}
+  m_Name: Current_IP
+  m_EditorClassIdentifier: 
+  isCompletedOnce: 1
+  ip: 185.235.207.212
+  country: France
+  countryCode: FR
+  region: IDF
+  regionName: "\xCEle-de-France"
+  city: Villejuif
+  zip: 
+  lat: 48.7913
+  lon: 2.3632
+  timezone: Europe/Paris

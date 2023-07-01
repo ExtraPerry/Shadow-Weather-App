@@ -4,13 +4,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using SimpleJSON;
+using Newtonsoft.Json;
+
+/** Notes :
+ * 
+ * Newtonsoft.Json has a few issues with unity :/
+ * https://stackoverflow.com/questions/71664312/using-unity-plastic-newtonsoft-json-not-found-in-rider
+ * https://discussions.unity.com/t/json-newtonsoft-the-type-or-namespace-name-plastic-does-not-exist-in-the-namespace-unity/256898/2
+ *
+*/
 
 public class IpGrabber : UpdatableMono
 {
-    [SerializeField]
-    private IpData ipData;
+    private IpInfo ipData;
 
-    private void Start()
+    private void Awake()
     {
         TriggerUpdate();
     }
@@ -35,24 +43,10 @@ public class IpGrabber : UpdatableMono
             yield break;
         }
 
-        JSONNode ipJsonData = JSON.Parse(response.downloadHandler.text);
-        if (ipJsonData["query"] == "fail")
-        {
-            print("Api failed but connection was succesful.");
-            yield break;
-        }
-        // Assign json data to ipdata.
-        ipData.ip = ipJsonData["query"];
-        ipData.country = ipJsonData["country"];
-        ipData.countryCode = ipJsonData["countryCode"];
-        ipData.region = ipJsonData["region"];
-        ipData.regionName = ipJsonData["regionName"];
-        ipData.city = ipJsonData["city"];
-        ipData.lat = ipJsonData["lat"];
-        ipData.lon = ipJsonData["lon"];
-        ipData.timezone = ipJsonData["timezone"];
-        // Update the status of the ipData to : a valid set of information is available.
+        IpData myDeserializedClass = JsonConvert.DeserializeObject<IpData>(response.downloadHandler.text);
+        ipData.data = myDeserializedClass;
+
         ipData.hasCompletedOnce();
-        print("Ip address has been retrieved => " + ipData.ip);
+        print("Ip address has been retrieved => " + ipData.data.query);
     }
 }
