@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 
 [Serializable]
-public class Alert
+public struct Alert
 {
     [JsonProperty("headline")]
     public string headline { get; set; }

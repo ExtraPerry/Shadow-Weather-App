@@ -87,17 +87,17 @@ public class AirCondition : UpdatableMono
             Debug.LogError("\"Weather Forecast Info\" is not assigned in \"" + gameObject.name + "\" inspector window.");
             return;
         }
-        
 
-        Forecastday today = null;
+
+        Forecastday today = new Forecastday();
         foreach (Forecastday day in weatherForecastInfo.data.forecast.forecastday)
         {
-            if (today is null || today.date_epoch > day.date_epoch) today = day;
+            if (today.Equals(default(Forecastday)) || today.date_epoch > day.date_epoch) today = day;
         }
-        Hour now = null;
+        Hour now = new Hour();
         foreach (Hour hour in today.hour)
         {
-            if (now is null || now.time_epoch > hour.time_epoch) now = hour;
+            if (now.Equals(default(Forecastday)) || now.time_epoch > hour.time_epoch) now = hour;
         }
         chanceOfRain.text = now.will_it_rain.ToString() + " %";
     }

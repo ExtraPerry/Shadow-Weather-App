@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 
 [Serializable]
-public class Forecast
+public struct Forecast
 {
     [JsonProperty("forecastday")]
     public List<Forecastday> forecastday { get; set; }

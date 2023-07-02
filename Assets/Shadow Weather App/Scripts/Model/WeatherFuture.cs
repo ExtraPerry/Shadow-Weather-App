@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 
 [Serializable]
-public class WeatherFuture
+public struct WeatherFuture
 {
     [JsonProperty("location")]
     public Location location { get; set; }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 
 [Serializable]
-public class Forecastday
+public struct Forecastday
 {
     public Forecastday(string date, int date_epoch, Day day, Astro astro, List<Hour> hour)
     {

@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 
 [Serializable]
-public class Astro
+public struct Astro
 {
     public Astro(string sunrise, string sunset, string moonrise, string moonset, string moon_phase, string moon_illumination, int is_moon_up, int is_sun_up)
     {

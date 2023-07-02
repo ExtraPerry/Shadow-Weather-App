@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 
 [Serializable]
-public class Location
+public struct Location
 {
     public Location(string name, string region, string country, double lat, double lon, string tz_id, int localtime_epoch, string localtime)
     {

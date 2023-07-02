@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 
 [Serializable]
-public class Condition
+public struct Condition
 {
     public Condition(string text, string icon, int code)
     {

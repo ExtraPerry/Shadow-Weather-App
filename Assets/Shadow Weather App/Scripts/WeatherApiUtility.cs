@@ -11,7 +11,7 @@ public static class WeatherApiUtility
         string cycle = isDay ? "day" : "night";
         string iconNum = GetIconNumFromCode(code).ToString();
 
-        Debug.Log("Fetching Ressource => Sprites/" + cycle + "/" + iconNum);
+        // Debug.Log("Fetching Ressource => Sprites/" + cycle + "/" + iconNum);
         return Resources.Load<Sprite>("Sprites/" + cycle + "/" + iconNum);
     }
 
@@ -55,7 +55,7 @@ public static class WeatherApiUtility
             }
         }
 
-        Debug.Log("Fetching Ressource => Sprites/" + match);
+        // Debug.Log("Fetching Ressource => Sprites/" + match);
         return Resources.Load<Sprite>("Sprites/" + match);
     }
 
@@ -63,7 +63,7 @@ public static class WeatherApiUtility
     {
         string fileName = (choice == ColdHot.Cold) ? "Cold" : "Hot";
 
-        Debug.Log("Fetching Ressource => Sprites/" + fileName);
+        // Debug.Log("Fetching Ressource => Sprites/" + fileName);
         return Resources.Load<Sprite>("Sprites/" + fileName);
     }
 }

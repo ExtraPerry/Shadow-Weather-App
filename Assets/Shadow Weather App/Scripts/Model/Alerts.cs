@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 
 [Serializable]
-public class Alerts
+public struct Alerts
 {
     [JsonProperty("alert")]
     public List<Alert> alert { get; set; }

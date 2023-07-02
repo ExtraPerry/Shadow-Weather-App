@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 
 [Serializable]
-public class WeatherCurrent
+public struct WeatherCurrent
 {
     public WeatherCurrent(Location location, Current current)
     {

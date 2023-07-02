@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 using System;
 
 [Serializable]
-public class IP
+public struct IP
 {
     public IP(string status, string country, string countryCode, string region, string regionName, string city, string zip, double lat, double lon, string timezone, string isp, string org, string orgFull, string query)
     {

@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 
 [Serializable]
-public class Current
+public struct Current
 {
     public Current(int last_updated_epoch, string last_updated, double temp_c, double temp_f, int is_day, Condition condition, double wind_mph, double wind_kph, int wind_degree, string wind_dir, double pressure_mb, double pressure_in, double precip_mm, double precip_in, int humidity, int cloud, double feelslike_c, double feelslike_f, double vis_km, double vis_miles, double uv, double gust_mph, double gust_kph, AirQuality air_quality)
     {

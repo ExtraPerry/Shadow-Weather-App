@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 
 [Serializable]
-public class AirQuality
+public struct AirQuality
 {
     public AirQuality(double co, double no2, double o3, double so2, double pm2_5, double pm10, int usepaindex, int gbdefraindex)
     {

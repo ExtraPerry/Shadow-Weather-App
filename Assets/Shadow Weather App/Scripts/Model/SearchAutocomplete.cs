@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 
 [Serializable]
-public class SearchAutocomplete
+public struct SearchAutocomplete
 {
     [JsonProperty("id")]
     public int id { get; set; }
