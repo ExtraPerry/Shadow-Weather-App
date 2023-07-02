@@ -33,7 +33,7 @@ public class UpdatableMono : MonoBehaviour
         TriggerUpdate();
     }
 
-    public void ResetRetryAttempts()
+    protected void ResetRetryAttempts()
     {
         retryAttemptCount = 0;
     }
