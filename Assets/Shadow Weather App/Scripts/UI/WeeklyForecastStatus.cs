@@ -11,6 +11,8 @@ public class WeeklyForecastStatus : UpdatableMono
     [SerializeField]
     private DayForecastStatusSection[] sections = new DayForecastStatusSection[7];
 
+    private SelectType selectType = SelectType.Average;
+
     private void Awake()
     {
         foreach (DayForecastStatusSection section in sections)
@@ -54,12 +56,30 @@ public class WeeklyForecastStatus : UpdatableMono
             DateTimeOffset time = new DateTimeOffset(DateTime.Now).AddDays(count);
             sections[count].title.text = (count == 0) ? "Today" : time.DayOfWeek.ToString();
             sections[count].icon.sprite = WeatherApiUtility.GetIconSprite(forecast.day.condition.code, true);
-            sections[count].info.text = forecast.day.maxtemp_c + " C°";
             sections[count].date.text = ((time.Day.ToString().Length == 1) ? "0" + time.Day : time.Day) + "/" + ((time.Month.ToString().Length == 1) ? "0" + time.Month : time.Month);
+
+            switch (selectType)
+            {
+                case SelectType.Maximum:
+                    sections[count].info.text = forecast.day.maxtemp_c + " C°";
+                    break;
+                case SelectType.Minimum:
+                    sections[count].info.text = forecast.day.mintemp_c + " C°";
+                    break;
+                default:
+                    sections[count].info.text = forecast.day.avgtemp_c + " C°";
+                    break;
+            }
 
             if (count >= 6) break;
             count++;
         }
+    }
+
+    public void SetSelectType(int selection)
+    {
+        selectType = (SelectType)selection;
+        TriggerUpdate();
     }
 }
 
@@ -70,4 +90,11 @@ public class DayForecastStatusSection
     public Image icon;
     public TMP_Text info;
     public TMP_Text date;
+}
+
+public enum SelectType
+{
+    Average,
+    Maximum,
+    Minimum
 }
