@@ -66,60 +66,6 @@ public static class WeatherApiUtility
         Debug.Log("Fetching Ressource => Sprites/" + fileName);
         return Resources.Load<Sprite>("Sprites/" + fileName);
     }
-
-    public static Direction ParseDirection(string input)
-    {
-        Direction direction = Direction.Undefined;
-        switch (input)
-        {
-            case "N":
-                direction = Direction.N;
-                break;
-            case "NNE":
-                direction = Direction.NNE;
-                break;
-            case "NE":
-                direction = Direction.NE;
-                break;
-            case "E":
-                direction = Direction.E;
-                break;
-            case "ESE":
-                direction = Direction.ESE;
-                break;
-            case "SE":
-                direction = Direction.SE;
-                break;
-            case "SSE":
-                direction = Direction.SSE;
-                break;
-            case "S":
-                direction = Direction.S;
-                break;
-            case "SSW":
-                direction = Direction.SSW;
-                break;
-            case "SW":
-                direction = Direction.SW;
-                break;
-            case "WSW":
-                direction = Direction.WSW;
-                break;
-            case "W":
-                direction = Direction.W;
-                break;
-            case "WNW":
-                direction = Direction.WNW;
-                break;
-            case "NN":
-                direction = Direction.NW;
-                break;
-            case "NNW":
-                direction = Direction.NNW;
-                break;
-        }
-        return direction;
-    }
 }
 
 [System.Serializable]
@@ -154,25 +100,4 @@ public enum ColdHot
 {
     Cold,
     Hot
-}
-
-public enum Direction
-{
-    Undefined,
-    N,
-    NNE,
-    NE,
-    ENE,
-    E,
-    ESE,
-    SE,
-    SSE,
-    S,
-    SSW,
-    SW,
-    WSW,
-    W,
-    WNW,
-    NW,
-    NNW
 }

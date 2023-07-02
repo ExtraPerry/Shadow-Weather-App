@@ -13,7 +13,8 @@ public class UpdatableMonoEditor : Editor
 
 		if (GUILayout.Button("Update"))
 		{
-				mono.TriggerUpdate();
+			Debug.Log("Manually updating " + mono.name + " in Editor.");
+			mono.TriggerUpdate();
 		}
 	}
 }
