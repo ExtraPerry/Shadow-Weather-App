@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/Shadow Weather App Main Scene.unity
+    guid: f8a6892ad55541c4a9a69ba1137c1a80
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 4ceb2ea27dc6af5468419a0ecda25e63,
       type: 2}
