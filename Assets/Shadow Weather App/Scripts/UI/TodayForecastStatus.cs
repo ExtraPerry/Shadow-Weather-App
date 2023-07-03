@@ -9,6 +9,9 @@ public class TodayForecastStatus : UpdatableMono
     [SerializeField]
     private WeatherForecastInfo weatherForecastInfo;
     [SerializeField]
+    private UnitChoiceInfo unitChoiceInfo;
+
+    [SerializeField]
     private HourForecastStatusSection[] sections = new HourForecastStatusSection[6];
 
     private Hour[] hourlyForecast;
@@ -76,7 +79,9 @@ public class TodayForecastStatus : UpdatableMono
     {
         if (hourlyForecast is null || hourlyForecast.Length == 0) return;
 
-        for(int i = 0; i < sections.Length; i++)
+        bool unitChoice = unitChoiceInfo.choice == UnitChoice.Metric;
+
+        for (int i = 0; i < sections.Length; i++)
         {
             Hour hour;
             try
@@ -88,18 +93,31 @@ public class TodayForecastStatus : UpdatableMono
                 Debug.LogError(e);
                 return;
             }
-            
-            sections[i].title.text = hour.time.Substring(10);
+
+            string timeStr;
+            if (unitChoice)
+            {
+                timeStr = hour.time.Substring(11);
+            }
+            else
+            {
+                string str1 = hour.time.Substring(11, 2);
+                string str2 = hour.time.Substring(14, 2);
+                int num = int.Parse(str1);
+                timeStr = (num <= 12) ? num + ":" + str2 + " AM" : (num - 12).ToString() + ":" + str2 + " PM";
+            }
+            sections[i].title.text = timeStr;
             sections[i].icon.sprite = WeatherApiUtility.GetIconSprite(hour.condition.code, hour.is_day == 1);
-            sections[i].info.text = hour.temp_c + " C°";
+            sections[i].info.text = (unitChoice) ? hour.temp_c + " °C" : hour.temp_c + " °F";
         }
     }
 
     public void UpdateOffsetSlider(float target)
     {
         int oldOffset = offset;
-        int newOffset = (int)Mathf.Lerp(0, 17, target);
-        Debug.Log("Target : " + target + " | Old : " + oldOffset + " | New : " + newOffset);
+        target = Mathf.Clamp(target, 0, 1);
+        int newOffset = (int)Mathf.Lerp(0, 18, target);
+        // Debug.Log("Target : " + target + " | Old : " + oldOffset + " | New : " + newOffset);
         if (oldOffset == newOffset) return;
         offset = newOffset;
         UpdateDisplays();
@@ -109,7 +127,7 @@ public class TodayForecastStatus : UpdatableMono
     {
         offset += amount;
         if (offset < 0) offset = 0;
-        if (offset > 17) offset = 17;
+        if (offset > 18) offset = 18;
         UpdateDisplays();
     }
 

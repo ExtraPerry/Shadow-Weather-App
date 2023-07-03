@@ -1,0 +1,257 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: QuestProControllerLeft
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: b8b48fe225a6e8a4da71381f4c28bebd,
+      type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: leftOrRight
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: joystickInput.m_UseReference
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: joystickInput.m_Action.m_Name
+    value: Joystick Input
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: joystickInput.m_Action.m_Type
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: joystickInput.m_Action.m_ExpectedControlType
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: joystickInput.m_Action.m_Id
+    value: 32654526-515c-4076-858e-a4aa7168bd82
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: joystickInput.m_Action.m_Processors
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: joystickInput.m_Action.m_Interactions
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: joystickInput.m_Action.m_SingletonActionBindings.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: joystickInput.m_Action.m_Flags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: joystickInput.m_Reference
+    value: 
+    objectReference: {fileID: 7596212294181904713, guid: e0ca4504471ca124088e1e2cfe6804ae,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: triggerInput.m_UseReference
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: triggerInput.m_Action.m_Name
+    value: Trigger Input
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: triggerInput.m_Action.m_Type
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: triggerInput.m_Action.m_ExpectedControlType
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: triggerInput.m_Action.m_Id
+    value: 0c7bc9b4-4e57-4da9-961e-fc1a29a54f59
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: triggerInput.m_Action.m_Processors
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: triggerInput.m_Action.m_Interactions
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: triggerInput.m_Action.m_SingletonActionBindings.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: triggerInput.m_Action.m_Flags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: triggerInput.m_Reference
+    value: 
+    objectReference: {fileID: 2526168894431210536, guid: e0ca4504471ca124088e1e2cfe6804ae,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: gripInput.m_UseReference
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: gripInput.m_Action.m_Name
+    value: Grip Input
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: gripInput.m_Action.m_Type
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: gripInput.m_Action.m_ExpectedControlType
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: gripInput.m_Action.m_Id
+    value: edb1232b-5dd4-49e3-be6e-dddbe8c62e67
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: gripInput.m_Action.m_Processors
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: gripInput.m_Action.m_Interactions
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: gripInput.m_Action.m_SingletonActionBindings.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: gripInput.m_Action.m_Flags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: gripInput.m_Reference
+    value: 
+    objectReference: {fileID: -1289947363739713011, guid: e0ca4504471ca124088e1e2cfe6804ae,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: upperButtonInput.m_UseReference
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: upperButtonInput.m_Action.m_Name
+    value: Upper Button Input
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: upperButtonInput.m_Action.m_Type
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: upperButtonInput.m_Action.m_ExpectedControlType
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: upperButtonInput.m_Action.m_Id
+    value: 8f8f75cb-b93d-4079-bd49-f7c8edd1913a
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: upperButtonInput.m_Action.m_Processors
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: upperButtonInput.m_Action.m_Interactions
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: upperButtonInput.m_Action.m_SingletonActionBindings.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: upperButtonInput.m_Action.m_Flags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: upperButtonInput.m_Reference
+    value: 
+    objectReference: {fileID: 5113088590926889233, guid: e0ca4504471ca124088e1e2cfe6804ae,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: lowerButtonInput.m_UseReference
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lowerButtonInput.m_Action.m_Name
+    value: Lower Button Input
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lowerButtonInput.m_Action.m_Type
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lowerButtonInput.m_Action.m_ExpectedControlType
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lowerButtonInput.m_Action.m_Id
+    value: 24950b7f-4e56-4a31-82a1-d42cb70ad659
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lowerButtonInput.m_Action.m_Processors
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lowerButtonInput.m_Action.m_Interactions
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lowerButtonInput.m_Action.m_SingletonActionBindings.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lowerButtonInput.m_Action.m_Flags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lowerButtonInput.m_Reference
+    value: 
+    objectReference: {fileID: -631344258065148156, guid: e0ca4504471ca124088e1e2cfe6804ae,
+      type: 3}
+  - target: {fileID: 0}
+    propertyPath: joystick
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: trigger
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: grip
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: upperButton
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lowerButton
+    value: 
+    objectReference: {fileID: 0}
+  m_ExcludedProperties: []

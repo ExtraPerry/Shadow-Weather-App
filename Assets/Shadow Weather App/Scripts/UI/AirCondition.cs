@@ -7,6 +7,8 @@ public class AirCondition : UpdatableMono
     private WeatherCurrentInfo weatherCurrentInfo;
     [SerializeField]
     private WeatherForecastInfo weatherForecastInfo;
+    [SerializeField]
+    private UnitChoiceInfo unitChoiceInfo;
 
     [SerializeField]
     private TMP_Text realFeel;
@@ -70,13 +72,16 @@ public class AirCondition : UpdatableMono
             StartCoroutine(RetryAttempt());
             return;
         }
+
+        bool unitChoice = unitChoiceInfo.choice == UnitChoice.Metric;
+
         Current current = weatherCurrentInfo.data.current;
-        realFeel.text = current.feelslike_c.ToString() + " C°";
-        cloud.text = current.cloud.ToString() + " %";
-        humidity.text = current.humidity.ToString() + " %";
-        wind.text = current.wind_kph.ToString() + " kph";
+        realFeel.text = (unitChoice) ? current.feelslike_c + " °C" : current.feelslike_f + " °F";
+        cloud.text = current.cloud + " %";
+        humidity.text = current.humidity + " %";
+        wind.text = (unitChoice) ? current.wind_kph + " kph" : current.wind_mph + " mph";
         windDirection.text = current.wind_dir;
-        visibility.text = current.vis_km.ToString() + " km";
+        visibility.text = (unitChoice) ? current.vis_km + " km" : current.vis_miles + " mi";
         uvIndex.text = current.uv.ToString();
     }
 

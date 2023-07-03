@@ -6,6 +6,8 @@ public class TodayCurrentStatus : UpdatableMono
 {
     [SerializeField]
     private WeatherCurrentInfo weatherCurrentInfo;
+    [SerializeField]
+    private UnitChoiceInfo unitChoiceInfo;
 
     [SerializeField]
     private TMP_Text city;
@@ -46,10 +48,12 @@ public class TodayCurrentStatus : UpdatableMono
             return;
         }
 
+        bool unitChoice = unitChoiceInfo.choice == UnitChoice.Metric;
+
         WeatherCurrent data = weatherCurrentInfo.data;
         city.text = data.location.name;
         countryAndRegion.text = data.location.country + " - " + data.location.region;
-        temp.text = data.current.feelslike_c + " C°";
+        temp.text = (unitChoice) ? data.current.temp_c + " °C" : data.current.temp_f + " °F";
         image.sprite = WeatherApiUtility.GetImageSprite(data.current.condition.code, data.current.is_day == 1);
     }
 }

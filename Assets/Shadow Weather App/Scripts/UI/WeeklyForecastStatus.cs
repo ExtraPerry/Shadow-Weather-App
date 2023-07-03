@@ -9,9 +9,12 @@ public class WeeklyForecastStatus : UpdatableMono
     [SerializeField]
     private WeatherForecastInfo weatherForecastInfo;
     [SerializeField]
-    private DayForecastStatusSection[] sections = new DayForecastStatusSection[7];
+    private TypeChoiceInfo typeChoiceInfo;
+    [SerializeField]
+    private UnitChoiceInfo unitChoiceInfo;
 
-    private SelectType selectType = SelectType.Average;
+    [SerializeField]
+    private DayForecastStatusSection[] sections = new DayForecastStatusSection[7];
 
     private void Awake()
     {
@@ -50,36 +53,40 @@ public class WeeklyForecastStatus : UpdatableMono
         // Also since we are always requesting exactly 7 days of forecast the list is always 7 long.
         List<Forecastday> data = weatherForecastInfo.data.forecast.forecastday;
 
+        bool unitChoice = unitChoiceInfo.choice == UnitChoice.Metric;
+
         int count = 0;
         foreach (Forecastday forecast in data)
         {
+            Day day = forecast.day;
             DateTimeOffset time = new DateTimeOffset(DateTime.Now).AddDays(count);
             sections[count].title.text = (count == 0) ? "Today" : time.DayOfWeek.ToString();
-            sections[count].icon.sprite = WeatherApiUtility.GetIconSprite(forecast.day.condition.code, true);
-            sections[count].date.text = ((time.Day.ToString().Length == 1) ? "0" + time.Day : time.Day) + "/" + ((time.Month.ToString().Length == 1) ? "0" + time.Month : time.Month);
+            sections[count].icon.sprite = WeatherApiUtility.GetIconSprite(day.condition.code, true);
 
-            switch (selectType)
+            string dayStr = (time.Day.ToString().Length == 1) ? "0" + time.Day : time.Day.ToString();
+            string monthStr = (time.Month.ToString().Length == 1) ? "0" + time.Month : time.Month.ToString();
+            sections[count].date.text = (unitChoice) ? dayStr + "/" + monthStr : monthStr + "/" + dayStr;
+
+            double temp;
+            if (typeChoiceInfo.choice == TypeChoice.Average)
             {
-                case SelectType.Maximum:
-                    sections[count].info.text = forecast.day.maxtemp_c + " C°";
-                    break;
-                case SelectType.Minimum:
-                    sections[count].info.text = forecast.day.mintemp_c + " C°";
-                    break;
-                default:
-                    sections[count].info.text = forecast.day.avgtemp_c + " C°";
-                    break;
+                temp = (unitChoice) ? day.avgtemp_c : day.avgtemp_f;
             }
+            else if (typeChoiceInfo.choice == TypeChoice.Maximum)
+            {
+                temp = (unitChoice) ? day.maxtemp_c : day.maxtemp_f;
+            }
+            else
+            {
+                temp = (unitChoice) ? day.mintemp_c : day.mintemp_f;
+            }
+            string unit = (unitChoice) ? " °C" : " °F";
+
+            sections[count].info.text = temp + unit;
 
             if (count >= 6) break;
             count++;
         }
-    }
-
-    public void SetSelectType(int selection)
-    {
-        selectType = (SelectType)selection;
-        TriggerUpdate();
     }
 }
 
@@ -90,11 +97,4 @@ public class DayForecastStatusSection
     public Image icon;
     public TMP_Text info;
     public TMP_Text date;
-}
-
-public enum SelectType
-{
-    Average,
-    Maximum,
-    Minimum
 }
