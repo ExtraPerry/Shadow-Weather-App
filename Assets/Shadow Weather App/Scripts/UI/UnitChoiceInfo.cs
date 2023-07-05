@@ -1,20 +1,23 @@
 using UnityEngine;
 
-[CreateAssetMenu()]
-public class UnitChoiceInfo : ScriptableObject
+namespace ExtraPerry.Shadow.WeatherApp.UI
 {
-    public UnitChoice choice;
-
-    public void SetChoice(int choice)
+    [CreateAssetMenu(menuName = "Shadow Weather App/UI/Unit Choice Info")]
+    public class UnitChoiceInfo : ScriptableObject
     {
-        if (choice < 0) choice = 0;
-        if (choice > 1) choice = 1;
-        this.choice = (UnitChoice)choice;
-    }
-}
+        public UnitChoice choice;
 
-public enum UnitChoice
-{
-    Metric,
-    Imperial
+        public void SetChoice(int choice)
+        {
+            if (choice < 0) choice = 0;
+            if (choice > 1) choice = 1;
+            this.choice = (UnitChoice)choice;
+        }
+    }
+
+    public enum UnitChoice
+    {
+        Metric,
+        Imperial
+    }
 }

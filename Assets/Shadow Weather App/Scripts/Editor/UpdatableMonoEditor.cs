@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEditor;
+using ExtraPerry.Shadow.WeatherApp;
 
 [CustomEditor(typeof(UpdatableMono), true)]
 public class UpdatableMonoEditor : Editor

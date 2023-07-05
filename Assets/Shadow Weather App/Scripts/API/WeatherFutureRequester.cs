@@ -3,6 +3,9 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
+using ExtraPerry.Shadow.WeatherApp.API;
+using ExtraPerry.Shadow.WeatherApp.API.SO;
+using ExtraPerry.Shadow.WeatherApp.API.Model;
 
 /** Notes :
  * 

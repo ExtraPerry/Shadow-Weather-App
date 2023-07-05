@@ -2,6 +2,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
+using ExtraPerry.Shadow.WeatherApp.API.SO;
+using ExtraPerry.Shadow.WeatherApp.API.Model;
 
 /** Notes :
  * 
@@ -11,43 +13,46 @@ using Newtonsoft.Json;
  *
 */
 
-public class WeatherForecastRequester : WeatherRequester
+namespace ExtraPerry.Shadow.WeatherApp.API
 {
-    [SerializeField]
-    private IPInfo ipInfo;
-    [SerializeField]
-    private WeatherForecastInfo weatherForecastInfo;
-
-    private void Awake()
+    public class WeatherForecastRequester : WeatherRequester
     {
-        TriggerUpdate();
-    }
+        [SerializeField]
+        private IPInfo ipInfo;
+        [SerializeField]
+        private WeatherForecastInfo weatherForecastInfo;
 
-    public override void TriggerUpdate()
-    {
-        Debug.Log("WeatherForecastRequester preparing to fetch api data.");
-        StartCoroutine(GetWeatherForecast());
-    }
-
-    private IEnumerator GetWeatherForecast()
-    {
-        var response = new UnityWebRequest("https://api.weatherapi.com/v1/forecast.json?key=" + apiKey + "&q=" + ipInfo.data.city + "&days=7&aqi=yes&alerts=yes")
+        private void Start()
         {
-            downloadHandler = new DownloadHandlerBuffer()
-        };
-        yield return response.SendWebRequest();
-
-        if (response.result == UnityWebRequest.Result.ConnectionError || response.result == UnityWebRequest.Result.ProtocolError)
-        {
-            ParseHttpErrorToConsole(response.responseCode, response.error);
-            yield break;
+            TriggerUpdate();
         }
 
-        weatherForecastInfo.data = JsonConvert.DeserializeObject<WeatherForecast>(response.downloadHandler.text);
-        weatherForecastInfo.HasCompletedOnce();
+        public override void TriggerUpdate()
+        {
+            Debug.Log("WeatherForecastRequester preparing to fetch api data.");
+            StartCoroutine(GetWeatherForecast());
+        }
 
-        Debug.Log("Finished parsing requested weather forecast data. => " + weatherForecastInfo.data.current.condition.text);
+        private IEnumerator GetWeatherForecast()
+        {
+            var response = new UnityWebRequest("https://api.weatherapi.com/v1/forecast.json?key=" + apiKey + "&q=" + ipInfo.data.city + "&days=7&aqi=yes&alerts=yes")
+            {
+                downloadHandler = new DownloadHandlerBuffer()
+            };
+            yield return response.SendWebRequest();
 
-        StartCoroutine(RaiseDataSyncEvent());
+            if (response.result == UnityWebRequest.Result.ConnectionError || response.result == UnityWebRequest.Result.ProtocolError)
+            {
+                ParseHttpErrorToConsole(response.responseCode, response.error);
+                yield break;
+            }
+
+            weatherForecastInfo.data = JsonConvert.DeserializeObject<WeatherForecast>(response.downloadHandler.text);
+            weatherForecastInfo.HasCompletedOnce();
+
+            Debug.Log("Finished parsing requested weather forecast data. => " + weatherForecastInfo.data.current.condition.text);
+
+            StartCoroutine(RaiseDataSyncEvent());
+        }
     }
 }

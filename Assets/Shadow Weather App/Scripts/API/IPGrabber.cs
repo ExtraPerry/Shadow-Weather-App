@@ -2,6 +2,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
+using ExtraPerry.Shadow.WeatherApp.API.SO;
+using ExtraPerry.Shadow.WeatherApp.API.Model;
 
 /** Notes :
  * 
@@ -11,39 +13,42 @@ using Newtonsoft.Json;
  *
 */
 
-public class IPGrabber : UpdatableMono
+namespace ExtraPerry.Shadow.WeatherApp.API
 {
-    [SerializeField]
-    private IPInfo ipData;
-
-    private void Awake()
+    public class IPGrabber : UpdatableMono
     {
-        TriggerUpdate();
-    }
+        [SerializeField]
+        private IPInfo ipData;
 
-    public override void TriggerUpdate()
-    {
-        Debug.Log("IpGrabber preparing to fetch api data.");
-        StartCoroutine(GrabIp());
-    }
-
-    private IEnumerator GrabIp()
-    {
-        var response = new UnityWebRequest("http://ip-api.com/json")
+        private void Start()
         {
-            downloadHandler = new DownloadHandlerBuffer()
-        };
-        yield return response.SendWebRequest();
-
-        if (response.result == UnityWebRequest.Result.ConnectionError || response.result == UnityWebRequest.Result.ProtocolError)
-        {
-            Debug.Log("Something went wrong while trying to connect to the api. Htttp code : " + response.responseCode);
-            yield break;
+            TriggerUpdate();
         }
 
-        ipData.data = JsonConvert.DeserializeObject<IP>(response.downloadHandler.text);
-        ipData.HasCompletedOnce();
+        public override void TriggerUpdate()
+        {
+            Debug.Log("IpGrabber preparing to fetch api data.");
+            StartCoroutine(GrabIp());
+        }
 
-        Debug.Log("Ip address has been retrieved => " + ipData.data.query);
+        private IEnumerator GrabIp()
+        {
+            var response = new UnityWebRequest("http://ip-api.com/json")
+            {
+                downloadHandler = new DownloadHandlerBuffer()
+            };
+            yield return response.SendWebRequest();
+
+            if (response.result == UnityWebRequest.Result.ConnectionError || response.result == UnityWebRequest.Result.ProtocolError)
+            {
+                Debug.Log("Something went wrong while trying to connect to the api. Htttp code : " + response.responseCode);
+                yield break;
+            }
+
+            ipData.data = JsonConvert.DeserializeObject<IP>(response.downloadHandler.text);
+            ipData.HasCompletedOnce();
+
+            Debug.Log("Ip address has been retrieved => " + ipData.data.query);
+        }
     }
 }
