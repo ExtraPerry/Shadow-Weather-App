@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using ExtraPerry.Shadow.WeatherApp.Synced;
 using ExtraPerry.Shadow.WeatherApp.Event;
 
 namespace ExtraPerry.Shadow.WeatherApp.API
@@ -8,7 +9,8 @@ namespace ExtraPerry.Shadow.WeatherApp.API
     {
         [SerializeField]
         protected CustomEvent dataSync;
-        public string apiKey;
+        [SerializeField]
+        protected SyncedString apiKey;
 
         protected void ParseHttpErrorToConsole(long code, string error)
         {

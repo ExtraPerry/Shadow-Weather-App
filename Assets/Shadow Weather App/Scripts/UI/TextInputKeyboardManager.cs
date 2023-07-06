@@ -8,8 +8,10 @@ namespace ExtraPerry.Shadow.WeatherApp.UI
     {
         private TMP_InputField inputField;
 
-        public float distance = 0.5f;
-        public float verticalOffset = -0.25f;
+        [SerializeField]
+        private float distance = 0.5f;
+        [SerializeField]
+        private float verticalOffset = -0.25f;
 
         public Transform positionSource;
 

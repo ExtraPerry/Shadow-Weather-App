@@ -16,7 +16,7 @@ namespace ExtraPerry.Shadow.WeatherApp.API
 
         public override void TriggerUpdate(Component sender, object data)
         {
-            if (sender is SearchInputManager && data is string) TriggerUpdate();
+            if (sender is SearchInputManager && data is string) TriggerUpdate((string)data);
         }
 
         public void TriggerUpdate(string input)
@@ -43,11 +43,15 @@ namespace ExtraPerry.Shadow.WeatherApp.API
             searchAutoInfo.HasCompletedOnce();
 
             string debugOutput = "";
-            foreach (SearchAutocomplete searchAuto in searchAutoInfo.data)
+            if (searchAutoInfo.data.Count != 0)
             {
-                debugOutput += "\"" + searchAuto.name + "\" ";
+                foreach (SearchAutocomplete searchAuto in searchAutoInfo.data)
+                {
+                    debugOutput += "\"" + searchAuto.name + "\" ";
+                }
+                Debug.Log("Finished parsing requested autocompletion data. => " + debugOutput);
             }
-            Debug.Log("Finished parsing requested weather forecast data. => " + debugOutput);
+            Debug.Log("Finished parsing requested autocompletion data. => No result");
 
             StartCoroutine(RaiseDataSyncEvent());
         }

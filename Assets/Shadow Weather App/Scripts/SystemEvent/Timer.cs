@@ -1,8 +1,9 @@
 using UnityEngine;
+using ExtraPerry.Shadow.WeatherApp.UI;
 
 namespace ExtraPerry.Shadow.WeatherApp.Event
 {
-    public class Timer : MonoBehaviour
+    public class Timer : UpdatableMono
     {
         [SerializeField]
         private CustomEvent customEvent;
@@ -23,14 +24,19 @@ namespace ExtraPerry.Shadow.WeatherApp.Event
 
             if (time <= 0)
             {
-                TriggerNow();
+                TriggerUpdate();
             }
         }
 
-        public void TriggerNow()
+        public override void TriggerUpdate(Component sender, object data)
         {
-            RaiseEvent();
+            if (sender is SearchInputManager || sender is ApiKeyInputManager) TriggerUpdate();
+        }
+
+        public override void TriggerUpdate()
+        {
             time = timerAmount;
+            RaiseEvent();
         }
 
         public void RaiseEvent()

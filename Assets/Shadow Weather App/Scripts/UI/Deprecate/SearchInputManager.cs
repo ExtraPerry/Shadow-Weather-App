@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Microsoft.MixedReality.Toolkit.Experimental.UI;
 using ExtraPerry.Shadow.WeatherApp.Synced;
 using ExtraPerry.Shadow.WeatherApp.Event;
 using ExtraPerry.Shadow.WeatherApp.API;
 using ExtraPerry.Shadow.WeatherApp.API.SO;
 using ExtraPerry.Shadow.WeatherApp.API.Model;
+using static Microsoft.MixedReality.Toolkit.Experimental.UI.KeyboardKeyFunc;
 
 namespace ExtraPerry.Shadow.WeatherApp.UI
 {
@@ -22,18 +24,21 @@ namespace ExtraPerry.Shadow.WeatherApp.UI
         private CustomEvent requestSearch;
         [SerializeField]
         private CustomEvent triggerApiTimer;
-        private bool isReadyToRequest;
 
+        private string oldTextInput;
         private string[] currentDropDownContext;
 
         private void Start()
         {
             inputField = GetComponent<TMP_InputField>();
+            oldTextInput = inputField.text;
         }
 
         public override void TriggerUpdate(Component sender, object data)
         {
-            if (sender is Timer) isReadyToRequest = true;
+            if (sender is Timer) TimerTrigger();
+
+            if (sender is KeyboardKeyFunc && data is Function) EnterOrCloseKeyPressed((Function)data);
 
             if (sender is SearchAutocompleteRequester) TriggerUpdate();
         }
@@ -41,44 +46,56 @@ namespace ExtraPerry.Shadow.WeatherApp.UI
         public override void TriggerUpdate()
         {
             List<SearchAutocomplete> data = searchAutoInfo.data;
-            if (data.Count == 0) return;
+            if (data.Count == 0)
+            {
+                Debug.Log("Search Autocomplete result is empty.");
+                return;
+            }
 
-            dropdown.ClearOptions();
             List<string> options = new List<string>();
             foreach (SearchAutocomplete searchAuto in data)
             {
                 options.Add(searchAuto.name);
             }
-            dropdown.AddOptions(options);
             currentDropDownContext = options.ToArray();
+            dropdown.ClearOptions();
+            dropdown.AddOptions(options);
             dropdown.Show();
+            Debug.Log("Search Autocomplete Dropdown showing options.");
         }
 
-        public void ResetRequestTimeout()
+        private void TimerTrigger()
         {
-            if (isReadyToRequest) return;
-            isReadyToRequest = true;
+            string input = inputField.text;
+            Debug.Log("Current : " + input + "| Old : " + oldTextInput);
+            if (!input.Equals(oldTextInput))
+            {
+                requestSearch.Raise(this, input);
+                oldTextInput = input;
+                Debug.Log("Sent a request for Autocomplete suggestion => " + input);
+                return;
+            }
+            Debug.Log("No change in search input.");
         }
 
-        public void OnValueChanged(string input)
+        private void EnterOrCloseKeyPressed(Function data)
         {
-            if (!isReadyToRequest) return;
-            isReadyToRequest = false;
-            requestSearch.Raise(this, input);
-        }
-
-        public void OnTextSubmit(string input)
-        {
-            if (inputField.wasCanceled) return;
             dropdown.Hide();
-            targetCity.value = input;
+            if (data == Function.Close) inputField.text = "";
+            if (data == Function.Enter) UpdateCityString(inputField.text);
         }
 
-        public void OnDropdownSubmit(int index)
+        public void OnDropdownSubmit()
         {
+            int index = dropdown.value;
             dropdown.Hide();
             string input = currentDropDownContext[index];
             inputField.text = input;
+            UpdateCityString(input);
+        }
+
+        private void UpdateCityString(string input)
+        {
             targetCity.value = input;
             triggerApiTimer.Raise(this);
         }

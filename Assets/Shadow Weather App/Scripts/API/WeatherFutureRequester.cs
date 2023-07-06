@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
+using ExtraPerry.Shadow.WeatherApp.Synced;
 using ExtraPerry.Shadow.WeatherApp.API;
 using ExtraPerry.Shadow.WeatherApp.API.SO;
 using ExtraPerry.Shadow.WeatherApp.API.Model;
@@ -18,13 +19,18 @@ using ExtraPerry.Shadow.WeatherApp.API.Model;
 public class WeatherFutureRequester : WeatherRequester
 {
     [SerializeField]
-    private IPInfo ipInfo;
+    private SyncedString targetCity;
     [SerializeField]
     private WeatherFutureInfo weatherFutureInfo;
 
     private void Awake()
     {
         TriggerUpdate();
+    }
+
+    public override void TriggerUpdate(Component sender, object data)
+    {
+        if (sender is IPGrabber) TriggerUpdate();
     }
 
     public override void TriggerUpdate()
@@ -37,7 +43,7 @@ public class WeatherFutureRequester : WeatherRequester
     {
         DateTime nowIn14Days = DateTime.Now.AddDays(14);
         string dt = nowIn14Days.Year + "-" + nowIn14Days.Month + "-" + nowIn14Days.Day;
-        var response = new UnityWebRequest("https://api.weatherapi.com/v1/future.json?key=" + apiKey + "&q=" + ipInfo.data.city + "&dt=" + dt)
+        var response = new UnityWebRequest("https://api.weatherapi.com/v1/future.json?key=" + apiKey.value + "&q=" + targetCity.value + "&dt=" + dt)
         {
             downloadHandler = new DownloadHandlerBuffer()
         };

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc9d2ac9d706d6b4a8b302b73d80c7df, type: 3}
-  m_Name: Weather_API_Key
+  m_Name: Weather_Default_API_Key
   m_EditorClassIdentifier: 
   value: 9f49110d9121404180894636233006
   resetOnAwake: 0

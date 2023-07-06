@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+using ExtraPerry.Shadow.WeatherApp.Event;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -44,6 +45,8 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.UI
         [SerializeField, FormerlySerializedAs("m_ButtonFunction")] private Function buttonFunction = Function.UNDEFINED;
 
         public Function ButtonFunction => buttonFunction;
+        [SerializeField]
+        private CustomEvent enterKeyPressed;
 
         /// <summary>
         /// Subscribe to the onClick event.
@@ -60,6 +63,7 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.UI
         /// </summary>
         private void FireFunctionKey()
         {
+            if (ButtonFunction == Function.Enter || buttonFunction == Function.Close) enterKeyPressed.Raise(this, buttonFunction);
             NonNativeKeyboard.Instance.FunctionKey(this);
         }
     }

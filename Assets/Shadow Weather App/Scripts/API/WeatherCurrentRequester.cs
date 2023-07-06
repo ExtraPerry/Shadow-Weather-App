@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
+using ExtraPerry.Shadow.WeatherApp.Synced;
 using ExtraPerry.Shadow.WeatherApp.API.SO;
 using ExtraPerry.Shadow.WeatherApp.API.Model;
 
@@ -18,13 +19,18 @@ namespace ExtraPerry.Shadow.WeatherApp.API
     public class WeatherCurrentRequester : WeatherRequester
     {
         [SerializeField]
-        private IPInfo ipInfo;
+        private SyncedString targetCity;
         [SerializeField]
         private WeatherCurrentInfo weatherCurrentInfo;
 
         private void Start()
         {
             TriggerUpdate();
+        }
+
+        public override void TriggerUpdate(Component sender, object data)
+        {
+            if (sender is IPGrabber) TriggerUpdate();
         }
 
         public override void TriggerUpdate()
@@ -35,7 +41,7 @@ namespace ExtraPerry.Shadow.WeatherApp.API
 
         private IEnumerator GetWeatherCurrent()
         {
-            var response = new UnityWebRequest("https://api.weatherapi.com/v1/current.json?key=" + apiKey + "&q=" + ipInfo.data.city + "&aqi=yes")
+            var response = new UnityWebRequest("https://api.weatherapi.com/v1/current.json?key=" + apiKey.value + "&q=" + targetCity.value + "&aqi=yes")
             {
                 downloadHandler = new DownloadHandlerBuffer()
             };

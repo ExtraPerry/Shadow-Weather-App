@@ -6,7 +6,7 @@ using ExtraPerry.Shadow.WeatherApp.API.Model;
 
 namespace ExtraPerry.Shadow.WeatherApp.UI
 {
-    public class SideBar : UpdatableMono
+    public class PermanentIconManager : UpdatableMono
     {
         [SerializeField]
         WeatherCurrentInfo weatherCurrentInfo;

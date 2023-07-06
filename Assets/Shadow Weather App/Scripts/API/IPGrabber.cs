@@ -2,6 +2,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
+using ExtraPerry.Shadow.WeatherApp.Synced;
+using ExtraPerry.Shadow.WeatherApp.Event;
 using ExtraPerry.Shadow.WeatherApp.API.SO;
 using ExtraPerry.Shadow.WeatherApp.API.Model;
 
@@ -19,6 +21,10 @@ namespace ExtraPerry.Shadow.WeatherApp.API
     {
         [SerializeField]
         private IPInfo ipData;
+        [SerializeField]
+        private SyncedString targetCity;
+        [SerializeField]
+        private CustomEvent ipGrabberFinished;
 
         private void Start()
         {
@@ -48,6 +54,9 @@ namespace ExtraPerry.Shadow.WeatherApp.API
             ipData.data = JsonConvert.DeserializeObject<IP>(response.downloadHandler.text);
             ipData.HasCompletedOnce();
 
+            if (targetCity.value == null || targetCity.value == "") targetCity.value = ipData.data.city;
+
+            ipGrabberFinished.Raise(this);
             Debug.Log("Ip address has been retrieved => " + ipData.data.query);
         }
     }
