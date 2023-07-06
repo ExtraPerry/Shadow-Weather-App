@@ -10,5 +10,6 @@ One useful tool that was used was https://json2csharp.com that helped making cla
 
 In the use case of this project and since unity doesn't really have any good way to import package dependencies as far as I know, all packages are included in this repo. So once cloned it should work out of the box in the editor.
 
-The UI design is meant to be simple and easy to use with an example here (current) :
-![image](https://github.com/ExtraPerry/Shadow-Weather-App/assets/19504925/f6f67fae-53b3-4e2a-9f9c-5de8f42a4d1f)
+The UI design is meant to be simple and easy to use with an example here :
+![image](https://github.com/ExtraPerry/Shadow-Weather-App/assets/19504925/da0f9afa-8c27-4248-b494-9e81f4447177)
+
