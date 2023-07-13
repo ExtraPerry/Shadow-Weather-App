@@ -114,7 +114,7 @@ namespace ExtraPerry.Shadow.WeatherApp.UI
                 }
                 sections[i].title.text = timeStr;
                 sections[i].icon.sprite = Utility.GetIconSprite(hour.condition.code, hour.is_day == 1);
-                sections[i].info.text = (unitChoice) ? hour.temp_c + " °C" : hour.temp_c + " °F";
+                sections[i].info.text = (unitChoice) ? hour.temp_c + " Â°C" : hour.temp_f + " Â°F";
             }
         }
 
